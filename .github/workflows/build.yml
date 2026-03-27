@@ -6,21 +6,16 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-
-      - name: Install iOS Workload
+      - name: Install Workload
         run: dotnet workload install ios
-
-      - name: Build Dylib
-        run: |
-          dotnet publish -c Release -f net8.0-ios -r ios-arm64 /p:BuildIpa=false /p:MtouchLink=None --no-self-contained
-          
-      - name: Upload Result
+      - name: Build
+        run: dotnet build -c Release -f net8.0-ios -r ios-arm64 /p:BuildIpa=false /p:MtouchLink=None
+      - name: Upload
         uses: actions/upload-artifact@v3
         with:
           name: MyCheat
-          path: bin/Release/net8.0-ios/ios-arm64/publish/VanguardBrawl.dll
+          path: bin/Release/net8.0-ios/ios-arm64/*.dll
