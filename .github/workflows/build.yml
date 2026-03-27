@@ -5,14 +5,22 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 8.0.204 # Versione specifica per evitare blocchi
+
       - name: Install iOS Workload
-        run: dotnet workload install ios
+        run: dotnet workload install ios --from-rollback-file https://aka.ms/dotnet/sdk-rollback/8.0.2xx.json
+
       - name: Build
-        run: dotnet build VanguardBrawl.csproj -c Release -f net8.0-ios -r ios-arm64 /p:BuildIpa=false /p:CheckEolTargetFramework=false
+        run: |
+          dotnet build VanguardBrawl.csproj -c Release -f net8.0-ios -r ios-arm64 \
+          /p:BuildIpa=false \
+          /p:CheckEolTargetFramework=false \
+          /p:ErrorOnDuplicatePublishOutputFiles=false
+        
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
