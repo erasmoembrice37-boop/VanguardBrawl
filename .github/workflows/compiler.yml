@@ -1,26 +1,21 @@
-name: Build iOS Cheat
+name: Final Build
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Force SDK Version
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x' # Forza l'uso della 8, ignorando la 10
-
-      - name: Install Workload
+          dotnet-version: 8.0.x
+      - name: Install iOS
         run: dotnet workload install ios --ignore-failed-sources
-
-      - name: Build Final
+      - name: Build
         run: |
           dotnet build VanguardBrawl.csproj -c Release -f net8.0-ios -r ios-arm64 \
-          /p:CheckEolTargetFramework=false \
-          /p:BuildIpa=false
-        
-      - name: Export
+          /p:BuildIpa=false /p:CheckEolTargetFramework=false
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: MyCheat
