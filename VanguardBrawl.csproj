@@ -1,16 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net8.0-ios</TargetFramework>
-		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-		<OutputType>Library</OutputType>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
-		<MtouchInterpreter>all</MtouchInterpreter>
-		<UseInterpreter>true</UseInterpreter>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="ClickableTransparentOverlay" Version="5.2.0" />
-		<PackageReference Include="ImGui.NET" Version="1.89.4" />
-	</ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0-ios</TargetFramework>
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+    <OutputType>Library</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
 </Project>
